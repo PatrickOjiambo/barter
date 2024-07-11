@@ -1,0 +1,15 @@
+[package]
+name = "barter"
+version = "1.0.0"
+authors = []
+
+[addresses]
+barter="0x6a402b2171d5dbaf9e6ab7fd67dcde225c7bbec42adf10e4036ae54a0091aa8b"
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]
