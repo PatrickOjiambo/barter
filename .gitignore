@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# smart contract
+.aptos
+build
+
+test-account.ts
+.env
+
