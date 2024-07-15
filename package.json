@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.23.0",
+    "@kade-net/portals-parser": "^0.0.23",
     "@neondatabase/serverless": "^0.9.4",
     "drizzle-kit": "^0.23.0",
     "drizzle-orm": "^0.32.0",
+    "effect": "^3.5.3",
+    "lodash": "^4.17.21",
     "next": "14.2.5",
     "postgres": "^3.4.4",
     "react": "^18",

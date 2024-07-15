@@ -1,5 +1,4 @@
 
-import postgres from 'postgres'
 import * as _schema from './schema'
 
 import { Pool } from '@neondatabase/serverless';
