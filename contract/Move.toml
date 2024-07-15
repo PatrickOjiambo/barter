@@ -15,4 +15,7 @@ subdir = "aptos-move/framework/aptos-framework"
 git = "https://github.com/aptos-labs/aptos-core.git"
 subdir = "aptos-move/framework/aptos-token-objects/"
 rev = "mainnet"
+[dependencies.KADE_NETWORK]
+git = "https://github.com/kade-net/network.git"
+rev = "main"
 [dev-dependencies]
