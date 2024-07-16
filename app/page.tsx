@@ -9,7 +9,7 @@ export default function Home() {
         <PortalRenderer
           kid={101}
           post_ref="post_ref"
-          url="http://localhost:3000/shacks"
+          url="http://localhost:3000/sudoku"
         />
         {/* <Image
           src="https://res.cloudinary.com/db7gfp5kb/image/upload/f_auto,q_auto/v1/portals/shacks/shack-banner"
