@@ -6,3 +6,16 @@ export interface PortalParams {
     status_message?: string,
     status_message_type?: 'success' | 'error' | 'info'
 }
+export interface SudokuGrid {
+    value: number[][];
+    solution: number[][];
+    difficulty: string;
+}
+
+export interface SudokuResponse {
+    newboard: {
+        grids: SudokuGrid[];
+        results: number;
+        message: string;
+    };
+}

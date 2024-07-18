@@ -2,8 +2,10 @@ import { PortalDefinition, PortalPacket, PortalPlugin } from "@kade-net/portals-
 import { PortalParams } from "../types";
 import { generateURL } from "../utils";
 import { theme } from "../theme";
+import { JSX } from "react";
 export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
     async generateAsync(args: PortalParams): Promise<PortalDefinition> {
+
         return Promise.resolve({
             id: this.id,
             title: "Sudoku",
@@ -18,12 +20,13 @@ export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
                 is_image: true
             }),
             aspect_ratio: '1:1',
+            input: 'Choose an option',
             buttons: [
                 {
                     title: "Quick play",
                     target: generateURL({
                         params: {
-                            id: "sudoku",
+                            id: "home",
                             button: '1'
                         }
                     }),
@@ -35,7 +38,7 @@ export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
                     title: "Play with friends",
                     target: generateURL({
                         params: {
-                            id: "sudoku",
+                            id: "home",
                             button: '2'
                         }
                     }),
@@ -52,45 +55,26 @@ export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
     }
     generateView(props: any): JSX.Element {
         return (
-            <div tw="w-full h-full flex flex-col items-center justify-center p-5">
-                <img
-                    src="https://res.cloudinary.com/db7gfp5kb/image/upload/f_auto,q_auto/v1/portals/shacks/logo-filled"
-                    alt='logo'
-                    width={100}
-                    height={100}
-                />
-                <h1
-                    style={{
-                        fontFamily: 'Signika-Bold',
-                        color: theme.colors.primary
-                    }}
-                    className="text-lg font-bold">
-                    Sudoku
-                </h1>
-                <p tw="text-center" >
-                    A random sudoku game to help you pass time
-                </p>
-                <p tw="text-sm text-[#f5b01c]" >
-                    Wait, you can also compete with friends.
-                </p>
-            </div>
-        )
+            <div>
+                We in this all
+            </div>)
     }
     async getNext<T = Record<string, any>>(params: T, packet: PortalPacket) {
         const { button } = params as unknown as { button: `${number}` }
         if (button === '1') {
+
+            console.log('coming from home');
             return {
-                id: 'random',
+                id: 'quick_play',
             }
         }
         if (button === '2') {
+
             return {
-                id: 'challenges',
+                id: 'quick_play',
             }
         }
         return {} as any
-
-
     }
     static init() {
         return new HomePortalPlugin('home')
