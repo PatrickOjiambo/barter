@@ -10,6 +10,7 @@ export async function generateMetadata(
     props: Props,
     parent: ResolvingMetadata
 ) {
+    console.log('say hurray');
     const { searchParams } = props
 
 

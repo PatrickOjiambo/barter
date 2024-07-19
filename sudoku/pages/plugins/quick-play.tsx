@@ -12,7 +12,7 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
             title: "Quick Play",
             description: "Play a random game of Sudoku",
             image: generateURL({
-                params: { id: "quick-play" },
+                params: { id: "quick_play" },
                 is_image: true
             }),
             aspect_ratio: '1,1',

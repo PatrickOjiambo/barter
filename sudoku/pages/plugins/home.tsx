@@ -14,13 +14,12 @@ export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
             description: "Play sudoku now",
             image: generateURL({
                 params: {
-                    id: "sudoku"
+                    id: "home"
 
                 },
                 is_image: true
             }),
             aspect_ratio: '1:1',
-            input: 'Choose an option',
             buttons: [
                 {
                     title: "Quick play",
