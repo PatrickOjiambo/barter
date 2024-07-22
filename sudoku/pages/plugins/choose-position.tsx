@@ -43,10 +43,11 @@ export class ChoosePositionPlugin extends PortalPlugin<PortalParams, any> {
             ]
         })
     }
-generateView(props: any): JSX.Element{
+generateView(props: {position: string}): JSX.Element{
+    const {position} = props;
     return (
         <div>
-            
+            position
         </div>
     )
 

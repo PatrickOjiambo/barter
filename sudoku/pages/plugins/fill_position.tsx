@@ -46,11 +46,20 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
             ]
         })
     }
-    generateView(props: any): JSX.Element {
-        return (<div></div>)
+    generateView(props: {
+        sudoku: Array<Array<number>>
+    }): JSX.Element {
+        const { sudoku } = props;
+        return (<div>sudoku</div>)
+    }
+    prepareProps(args: PortalParams): Promise<any> {
+        const {sudoku} = args;
+        return Promise.resolve({
+            sudoku: sudoku
+        })
     }
     async getNext<CurrentParams = Record<string, any>>(params: CurrentParams, packet: PortalPacket): Promise<Record<string, string> & { id: string; }> {
-        const { button, position, sudoku } = params as unknown as { button: `${number}`, position: string, sudoku: string }
+        const { button, position, sudoku } = params as unknown as { button: `${number}`, position: string, sudoku: Array<Array<number>> }
         if (button === '1') {
             return Promise.resolve({
                 id: 'choose_position'
@@ -58,6 +67,8 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
         }
         if (button === '2') {
             const digit = packet.input_text;
+            assert(parseInt(digit) > 0 && parseInt(digit) < 10, 'Invalid digit')
+
             const col_mapping: any = {
                 a: 0,
                 b: 1,
@@ -71,10 +82,11 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
             const [row, col] = position.split('');
             const row_index = parseInt(row) - 1;
             const col_index = col_mapping[col];
-            const final_index = [row_index][col_index];
-            assert(parseInt(digit) > 0 && parseInt(digit) < 10, 'Invalid digit')
-
-
+            sudoku[row_index][col_index] = parseInt(digit);
+            Promise.resolve({
+                id: 'play',
+                sudoku: sudoku
+            })      
         }
         return Promise.resolve({
             id: 'choose_position'
