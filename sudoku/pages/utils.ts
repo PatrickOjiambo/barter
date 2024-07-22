@@ -37,24 +37,32 @@ export const isURLImage = async (url: string) => {
     }
 }
 export async function generateBoard(difficulty: 'easy' | 'medium' | 'hard'): Promise<SudokuGrid> {
-    let easy;
+    console.log("thi is the difficulty", difficulty);
+    let grid;
     let count = 0;
     let fallback: SudokuGrid;
     do {
+        console.log('We are doing something');
         const response = await fetch('https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}');
+        console.log('We got a response', response);
         const data: SudokuResponse = await response.json();
         fallback = data.newboard.grids[0];
-        easy = data.newboard.grids.find((grid) => grid.difficulty === difficulty);
+        console.log('We got a data', data);
+        grid = data.newboard.grids.find((grid) => grid.difficulty === difficulty);
     }
-    while (easy === undefined && count < 5) {
+    while (grid === undefined && count < 5) {
+        console.log('Entered the while loop');
         const response = await fetch('https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}');
         const data: SudokuResponse = await response.json();
-        easy = data.newboard.grids.find((grid) => grid.difficulty === 'difficulty');
+        grid = data.newboard.grids.find((grid) => grid.difficulty === 'difficulty');
         count++;
 
     }
-    if (easy === undefined) {
+    if (grid === undefined) {
+        console.log('Maybe something happened');
         return fallback
     }
-    return easy
+    console.log('We got something');
+    console.log("EASY::", grid);
+    return grid
 }

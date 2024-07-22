@@ -4,7 +4,9 @@ export interface PortalParams {
     user_address?: string,
     back?: string,
     status_message?: string,
-    status_message_type?: 'success' | 'error' | 'info'
+    status_message_type?: 'success' | 'error' | 'info',
+    position: string,
+    sudoku: Array<Array<number>>,
 }
 export interface SudokuGrid {
     value: number[][];

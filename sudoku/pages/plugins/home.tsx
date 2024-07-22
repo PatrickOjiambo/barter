@@ -54,9 +54,29 @@ export class HomePortalPlugin extends PortalPlugin<PortalParams, any> {
     }
     generateView(props: any): JSX.Element {
         return (
-            <div>
-                We in this all
-            </div>)
+            <div tw="w-full h-full flex flex-col items-center justify-center p-5">
+            <img
+                src="https://res.cloudinary.com/db7gfp5kb/image/upload/f_auto,q_auto/v1/portals/shacks/logo-filled"
+                alt='logo'
+                width={100}
+                height={100}
+            />
+            <h1
+                style={{
+                    fontFamily: 'Signika-Bold',
+                    color: theme.colors.primary
+                }}
+                className="text-lg font-bold">
+                sudoku
+            </h1>
+            <p tw="text-center" >
+                A random sudoku portal for you
+            </p>
+            <p tw="text-sm text-[#f5b01c]" >
+                Play for fun or join weekly challenges
+            </p>
+        </div>
+    )
     }
     async getNext<T = Record<string, any>>(params: T, packet: PortalPacket) {
         const { button } = params as unknown as { button: `${number}` }

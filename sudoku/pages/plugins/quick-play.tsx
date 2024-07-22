@@ -61,12 +61,13 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
             };
 
             const difficulty = packet.input_text;
-
             if (difficulty in levels) {
                 const game = await generateBoard(levels[difficulty]);
+                console.log('vawvchkavwdchvdchdwvcjk');
                 return Promise.resolve({
                     id: 'play',
-                    game: JSON.stringify(game)
+                    game: JSON.stringify(game),
+                    
                 });
             } else {
                 const response = await fetch('https://sudoku-api.vercel.app/api/dosuku');
@@ -79,6 +80,7 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
                 }
             }
         }
+        console.log('Left the function');
         return Promise.resolve({
             id: 'home'
         })
@@ -86,12 +88,24 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
     }
     async prepareProps(args: PortalParams): Promise<any> {
         return Promise.resolve({})
-        
+
     }
     generateView(props: any): JSX.Element {
         return (
             <div tw="flex flex-1 flex-col w-full h-full items-center p-5">
-                This is the page
+                <div tw="flex flex-col w-full items-center">
+                    <h1 tw="text-2xl font-bold">Quick Play</h1>
+                    <p tw="mt-2">Play a random game of Sudoku</p>
+                </div>
+                <div tw="flex flex-col w-full items-center mt-5">
+                   Enter the mode of difficulty you want to play.
+                </div>
+                <ul>
+                    <li> 1. Easy 👍 </li>
+                    <li>2. Medium ✌️</li>
+                    <li>3. Hard💪</li>
+                   </ul>
+
             </div>
         )
 
