@@ -62,16 +62,16 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
 
             const difficulty = packet.input_text;
             if (difficulty in levels) {
-                const game = await generateBoard(levels[difficulty]);
-                console.log('vawvchkavwdchvdchdwvcjk');
+                // const game = await generateBoard(levels[difficulty]);
+                const game = [[19,0,5,0,0,7,9,8,6],[0,0,9,0,0,6,0,0,0],[7,0,4,0,5,0,2,0,3],[0,5,0,0,0,0,7,3,0],[0,0,8,0,0,3,1,2,0],[0,2,0,4,0,9,6,5,8],[6,0,2,8,1,0,5,9,0],[0,0,0,7,0,0,0,0,0],[5,9,7,0,3,2,8,4,0]];
                 return Promise.resolve({
-                    id: 'play',
-                    game: JSON.stringify(game),
-                    
+                    id: 'choose_position',
+                    sudoku: JSON.stringify(game),
+
                 });
             } else {
-                const response = await fetch('https://sudoku-api.vercel.app/api/dosuku');
-                const data: SudokuGrid = await response.json();
+                // const response = await fetch('https://sudoku-api.vercel.app/api/dosuku');
+                // const data: SudokuGrid = await response.json();
                 return {
                     id: 'status_message',
                     back: 'quick_play',

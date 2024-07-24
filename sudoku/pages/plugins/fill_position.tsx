@@ -21,7 +21,7 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
                     title: 'Back',
                     target: generateURL({
                         params: {
-                            id: 'fill_position',
+                            id: 'choose_position',
                             button: '1',
                             position: position,
                             sudoku: JSON.stringify(sudoku)
@@ -50,7 +50,7 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
         sudoku: Array<Array<number>>
     }): JSX.Element {
         const { sudoku } = props;
-        return (<div>sudoku</div>)
+        return (<div>{sudoku}</div>)
     }
     prepareProps(args: PortalParams): Promise<any> {
         const {sudoku} = args;
@@ -58,7 +58,7 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
             sudoku: sudoku
         })
     }
-    async getNext<CurrentParams = Record<string, any>>(params: CurrentParams, packet: PortalPacket): Promise<Record<string, string> & { id: string; }> {
+    async getNext(params: any, packet: PortalPacket): Promise<Record<string, string> & { id: string; }> {
         const { button, position, sudoku } = params as unknown as { button: `${number}`, position: string, sudoku: Array<Array<number>> }
         if (button === '1') {
             return Promise.resolve({
@@ -84,7 +84,7 @@ export class FillPositionPlugin extends PortalPlugin<PortalParams, any> {
             const col_index = col_mapping[col];
             sudoku[row_index][col_index] = parseInt(digit);
             Promise.resolve({
-                id: 'play',
+                id: 'choose_position',
                 sudoku: sudoku
             })      
         }

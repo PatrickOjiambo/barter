@@ -6,7 +6,7 @@ export interface PortalParams {
     status_message?: string,
     status_message_type?: 'success' | 'error' | 'info',
     position: string,
-    sudoku: Array<Array<number>>,
+    sudoku: string,
 }
 export interface SudokuGrid {
     value: number[][];
