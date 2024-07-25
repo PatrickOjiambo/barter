@@ -5,6 +5,8 @@ import { generateURL } from "../utils";
 import { JSX } from "react";
 import { generateBoard } from "../utils";
 import db from "@/db";
+import { zero } from "effect/Duration";
+import { collectAll } from "effect/Sink";
 export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
     async generateAsync(args: PortalParams): Promise<PortalDefinition> {
         return Promise.resolve({
@@ -16,7 +18,7 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
                 is_image: true
             }),
             aspect_ratio: '1,1',
-            input: 'Enter the mode of difficulty you want to play. eg 1 for easy, 2 for medium, 3 for hard',
+            input: 'Enter the mode of difficulty you want to play.',
             buttons: [
                 {
                     title: 'Back',
@@ -63,24 +65,23 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
             const difficulty = packet.input_text;
             if (difficulty in levels) {
                 // const game = await generateBoard(levels[difficulty]);
-                const game = [[19,0,5,0,0,7,9,8,6],[0,0,9,0,0,6,0,0,0],[7,0,4,0,5,0,2,0,3],[0,5,0,0,0,0,7,3,0],[0,0,8,0,0,3,1,2,0],[0,2,0,4,0,9,6,5,8],[6,0,2,8,1,0,5,9,0],[0,0,0,7,0,0,0,0,0],[5,9,7,0,3,2,8,4,0]];
+                const game = [[1, 0, 5, 0, 0, 7, 9, 8, 6], [0, 0, 9, 0, 0, 6, 0, 0, 0], [7, 0, 4, 0, 5, 0, 2, 0, 3], [0, 5, 0, 0, 0, 0, 7, 3, 0], [0, 0, 8, 0, 0, 3, 1, 2, 0], [0, 2, 0, 4, 0, 9, 6, 5, 8], [6, 0, 2, 8, 1, 0, 5, 9, 0], [0, 0, 0, 7, 0, 0, 0, 0, 0], [5, 9, 7, 0, 3, 2, 8, 4, 0]];
+                //Used to mark original array
+                const zeroAdded = game.map((row, rowIndex) => row.map((col, colIndex) => col === 0 ? 0 : Number(`${col}${0}`)));
+                console.log(zeroAdded);
                 return Promise.resolve({
                     id: 'choose_position',
-                    sudoku: JSON.stringify(game),
+                    sudoku: JSON.stringify(zeroAdded),
 
                 });
             } else {
                 // const response = await fetch('https://sudoku-api.vercel.app/api/dosuku');
                 // const data: SudokuGrid = await response.json();
-                return {
-                    id: 'status_message',
-                    back: 'quick_play',
-                    status_message: 'Invalid difficulty level',
-                    status_message_type: 'error'
-                }
+                return Promise.resolve({
+                    id: 'quick_play',
+                })
             }
         }
-        console.log('Left the function');
         return Promise.resolve({
             id: 'home'
         })
@@ -97,15 +98,24 @@ export class QuickPlayPlugin extends PortalPlugin<PortalParams, any> {
                     <h1 tw="text-2xl font-bold">Quick Play</h1>
                     <p tw="mt-2">Play a random game of Sudoku</p>
                 </div>
-                <div tw="flex flex-col w-full items-center mt-5">
-                   Enter the mode of difficulty you want to play.
+                <div tw="flex text-lg flex-col w-full items-center mt-5">
+                    Enter the mode of difficulty you want to play.
                 </div>
-                <ul>
-                    <li> 1. Easy 👍 </li>
+                <ul tw="text-xl">
+                    <li>1. Easy 👍 </li>
                     <li>2. Medium ✌️</li>
                     <li>3. Hard💪</li>
-                   </ul>
-
+                </ul>
+                <div tw="flex flex-col text-md pb-2">
+                    <h4 tw="pb-2">
+                        Some tips for solving Sudoku:
+                    </h4>
+                    <span tw="pb-2">Avoid trial and error – find a logical reason for entering each number.</span>
+                    <span tw="pb-2">Look for rows, columns and 3×3 boxes with just a few blanks remaining.</span>
+                    <span tw="pb-2">Try adding numbers which already appear often in the Sudoku puzzle.</span>
+                    <span tw="pb-2">After entering a number, check to see where else it has to go.</span>
+                </div>
+                <div tw="text-lg">Have fun🥳🧩🧩</div>
             </div>
         )
 

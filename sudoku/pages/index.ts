@@ -1,6 +1,6 @@
 import { PortalGenerator, PortalPacket } from "@kade-net/portals-parser";
 import {PortalParams} from "./types";
-import { HomePortalPlugin, QuickPlayPlugin, FillPositionPlugin, ChoosePositionPlugin } from "./plugins";
+import { HomePortalPlugin, QuickPlayPlugin, FillPositionPlugin, ChoosePositionPlugin, ChallengesPortalPlugin } from "./plugins";
 import { register } from "module";
 function registerPortalPages(args: PortalParams)
 {
@@ -12,6 +12,7 @@ function registerPortalPages(args: PortalParams)
     .registerPlugin(QuickPlayPlugin.init())
     .registerPlugin(FillPositionPlugin.init())
     .registerPlugin(ChoosePositionPlugin.init())
+    .registerPlugin(ChallengesPortalPlugin.init())
 }
 export async function generatePortalModel(args: PortalParams) {
     return registerPortalPages(args.id ? args : {
